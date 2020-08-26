@@ -36,12 +36,13 @@ def testPrime(n):
 
 def rsaKeyGen():
     global d
-    p = rand.randint(10, 20)
+    p = rand.randint(12, 20)
     while testPrime(p) == False:
-        p = rand.randint(10, 24)
-    q = rand.randint(1, 10)
+        p = rand.randint(12, 20)
+    '''q = rand.randint(1, 10)
     while testPrime(q) == False or q == p:
-        q = rand.randint(10, 24)
+        q = rand.randint(2, 10)'''
+    q = 7
 
     n = p*q
     phi = (p-1)*(q-1)
@@ -58,7 +59,7 @@ def rsaKeyGen():
         d = (1 +x*phi)/e
         x+=1
     d = int(d)
-    print(str(d))
+    print("Calculated pkey: "+str(d))
     return (n, e)
 
 def rsaEnc(msg, pkey):
@@ -76,11 +77,3 @@ def rsaDec(encarr, n):
     return msg.join(decarr)
 
 
-#msg = input()
-#pkey = rsaKeyGen()
-#print(pkey)
-#encmsg = ""
-#ec = rsaEnc(msg, pkey)
-#print(ec, encmsg.join(ec))
-#msg = rsaDec(ec, pkey[0])
-#print("Decrypted: "+msg)
